@@ -125,6 +125,11 @@ exit 0
 
 
 
+#
+#   Create a sequence of folder names in a string variable
+#   Further been used to create and rotate snapshot folder
+#   names
+#
 for i in $(seq $NR_SNAPSHOTS -1 1); do
     _ID=$(printf "%02d" $i)
     SNAPSHOTS="$SNAPSHOTS backup.${_ID}"
