@@ -84,7 +84,6 @@ function check_arguments()
 while getopts ":IhvB:S:" opt; do
     case $opt in
         I)
-            echo "-I init a backup system"
             FLAG_INIT=true
             ;;
         S)
