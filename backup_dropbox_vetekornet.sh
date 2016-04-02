@@ -51,7 +51,7 @@ function _help()
     echo
     echo "  Mandatory:"
     echo "  ----------"
-    echo "   -I                 init a backup system"
+    echo "   -I                 init a backup system, requires a "
     echo "   -S   FOLDER        source folder"
     echo "   -B   FOLDER        backup folder"
     echo "   -N   NR            number of rotating snapshots to take"
@@ -59,6 +59,15 @@ function _help()
     echo "  Optional:"
     echo "  ---------"
     echo "   -v                 verbose mode"
+    echo
+    echo "  Examples:"
+    echo "  ---------"
+    echo "   $_BASENAME -I -S SOURCE_FOLDER BACKUP_FOLDER"
+    echo
+    echo "       generates a backup folder with an init file describing source file "
+    echo "       and number of snapshots to rotate"
+    echo 
+    echo "   $_BASENAME -B BACKUP_FOLDER"
     echo
 }
 
@@ -71,10 +80,12 @@ function check_arguments()
             return 1
         fi
     fi
-    if [[ -n $FOLDER_SOURCE ]]; then
-        if [[ ! -d $FOLDER_SOURCE ]]; then
-            perror "Could not find source folder [$FOLDER_SOURCE]"
-            return 1
+    if $FLAG_INIT; then
+        if [[ -n $FOLDER_SOURCE ]]; then
+            if [[ ! -d $FOLDER_SOURCE ]]; then
+                perror "Could not find source folder [$FOLDER_SOURCE]"
+                return 1
+            fi
         fi
     fi
     return 0
